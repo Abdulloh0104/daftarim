@@ -1,12 +1,11 @@
 import { IsNotEmpty, IsString } from "class-validator";
 
-export class CreateTypeDto {
+export class CreateRoleDto {
   @IsString()
-  @IsNotEmpty({
-    message: "No name is not allowed",
-  })
-  name: string;
+  @IsNotEmpty()
+  value: string;
 
   @IsString()
+  @IsNotEmpty()
   description: string;
 }

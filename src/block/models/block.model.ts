@@ -1,7 +1,16 @@
-import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import {
+  BelongsTo,
+  BelongsToMany,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
 import { Property } from "../../property/models/property.model";
 import { BlockProperty } from "../../block-property/models/block-property.model";
 import { Type } from "../../types/models/type.model";
+import { User } from "../../user/models/user.model";
 
 interface IBlockCreationAttr {
   typeId: number;
@@ -19,10 +28,15 @@ export class Block extends Model<Block, IBlockCreationAttr> {
   })
   declare id: number;
 
+  @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
+    onDelete: "SET NULL",
   })
   created_by: number;
+
+  @BelongsTo(() => User, { foreignKey: "created_by" })
+  user: User;
 
   @BelongsToMany(() => Property, () => BlockProperty)
   properties: Property[];
@@ -46,4 +60,9 @@ export class Block extends Model<Block, IBlockCreationAttr> {
 
   @BelongsTo(() => Block)
   parent_category: Block;
+
+  @Column({
+    type: DataType.INTEGER,
+  })
+  order_index: number;
 }

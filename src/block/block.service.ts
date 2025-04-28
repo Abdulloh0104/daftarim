@@ -3,7 +3,7 @@ import { CreateBlockDto } from "./dto/create-block.dto";
 import { UpdateBlockDto } from "./dto/update-block.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { Block } from "./models/block.model";
-import { Type } from "class-transformer";
+// import { Type } from "class-transformer";
 
 @Injectable()
 export class BlockService {

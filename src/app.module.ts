@@ -1,14 +1,21 @@
-import { Module } from '@nestjs/common';
-import { PropertyModule } from './property/property.module';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { ConfigModule } from '@nestjs/config';
-import { Property } from './property/models/property.model';
-import { BlockModule } from './block/block.module';
-import { Block } from './block/models/block.model';
-import { TypesModule } from './types/types.module';
-import { Type } from './types/models/type.model';
-import { BlockPropertyModule } from './block-property/block-property.module';
-import { BlockProperty } from './block-property/models/block-property.model';
+import { Module } from "@nestjs/common";
+import { PropertyModule } from "./property/property.module";
+import { SequelizeModule } from "@nestjs/sequelize";
+import { ConfigModule } from "@nestjs/config";
+import { Property } from "./property/models/property.model";
+import { BlockModule } from "./block/block.module";
+import { Block } from "./block/models/block.model";
+import { TypesModule } from "./types/types.module";
+import { Type } from "./types/models/type.model";
+import { BlockPropertyModule } from "./block-property/block-property.module";
+import { BlockProperty } from "./block-property/models/block-property.model";
+import { UserModule } from "./user/user.module";
+import { User } from "./user/models/user.model";
+import { AdminModule } from "./admin/admin.module";
+import { AuthModule } from "./auth/auth.module";
+import { Admin } from "./admin/models/admin.model";
+import { RoleModule } from "./role/role.module";
+import { Role } from "./role/models/role.model";
 
 @Module({
   imports: [
@@ -20,7 +27,7 @@ import { BlockProperty } from './block-property/models/block-property.model';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DB,
-      models: [Property,Block,Type,BlockProperty],
+      models: [Property, Block, Type, BlockProperty, User, Admin, Role],
       autoLoadModels: true,
       sync: { alter: true },
       logging: false,
@@ -29,6 +36,10 @@ import { BlockProperty } from './block-property/models/block-property.model';
     BlockModule,
     TypesModule,
     BlockPropertyModule,
+    UserModule,
+    AdminModule,
+    AuthModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [],

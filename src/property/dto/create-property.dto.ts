@@ -1,4 +1,11 @@
+import { IsNotEmpty, IsString } from "class-validator"
+
 export class CreatePropertyDto {
-    name:string
-    description:string    
+  @IsString()
+  @IsNotEmpty({
+    message: "No name is not allowed",
+  })
+  name: string;
+  @IsString()
+  description: string;
 }
