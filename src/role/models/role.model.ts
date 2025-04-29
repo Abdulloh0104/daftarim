@@ -7,6 +7,7 @@ import {
   Table,
 } from "sequelize-typescript";
 import { Admin } from "../../admin/models/admin.model";
+import { ApiProperty } from "@nestjs/swagger";
 
 interface IRoleCreationAttr {
   value: string;
@@ -22,6 +23,10 @@ export class Role extends Model<Role, IRoleCreationAttr> {
   })
   declare id: number;
 
+  @ApiProperty({
+    example: "user",
+    description: "Ro'li",
+  })
   @Column({
     type: DataType.STRING(100),
     allowNull: false,
@@ -29,6 +34,10 @@ export class Role extends Model<Role, IRoleCreationAttr> {
   })
   value: string;
 
+  @ApiProperty({
+    example: "user",
+    description: "ro'l haqida",
+  })
   @Column({
     type: DataType.STRING(100),
   })

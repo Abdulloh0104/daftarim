@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { CreateTypeDto } from "./dto/create-type.dto";
 import { UpdateTypeDto } from "./dto/update-type.dto";
-import { Type } from "./models/type.model";
+import { Types } from "./models/type.model";
 import { InjectModel } from "@nestjs/sequelize";
 
 @Injectable()
 export class TypesService {
-  constructor(@InjectModel(Type) private typeModel: typeof Type) {}
+  constructor(@InjectModel(Types) private typeModel: typeof Types) {}
   create(createTypeDto: CreateTypeDto) {
     return this.typeModel.create(createTypeDto);
   }
@@ -32,6 +32,6 @@ export class TypesService {
     if (type > 0) {
       return { message: `${id}-type deleted` };
     }
-    return { message: `Type was not found` };
+    return { message: `Types was not found` };
   }
 }

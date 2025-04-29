@@ -7,12 +7,13 @@ import {
 import { Observable } from "rxjs";
 
 @Injectable()
-export class JwtSelfGuard implements CanActivate {
+export class JwtAdminSelfGuard implements CanActivate {
   canActivate(
     context: ExecutionContext
   ): boolean | Promise<boolean> | Observable<boolean> {
     const req = context.switchToHttp().getRequest();
-    if (req.user.id != req.params.id || req.user.roles !== "USER") {
+    // console.log(req.user, req.params.id);
+    if (req.user.id != req.params.id || req.user.roles !== "ADMIN") {
       throw new ForbiddenException({
         message: "Ruxsat etilmagan foydalanuvchi",
       });

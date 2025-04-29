@@ -6,7 +6,7 @@ import { Property } from "./property/models/property.model";
 import { BlockModule } from "./block/block.module";
 import { Block } from "./block/models/block.model";
 import { TypesModule } from "./types/types.module";
-import { Type } from "./types/models/type.model";
+import { Types } from "./types/models/type.model";
 import { BlockPropertyModule } from "./block-property/block-property.module";
 import { BlockProperty } from "./block-property/models/block-property.model";
 import { UserModule } from "./user/user.module";
@@ -27,7 +27,7 @@ import { Role } from "./role/models/role.model";
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DB,
-      models: [Property, Block, Type, BlockProperty, User, Admin, Role],
+      models: [Property, Block, Types, BlockProperty, User, Admin, Role],
       autoLoadModels: true,
       sync: { alter: true },
       logging: false,

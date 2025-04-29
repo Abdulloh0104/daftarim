@@ -17,6 +17,7 @@ export class Admin extends Model<Admin, IAdminCreationAttr> {
   })
   declare id: number;
 
+  
   @Column({
     type: DataType.STRING(100),
   })

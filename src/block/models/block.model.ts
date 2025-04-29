@@ -9,8 +9,9 @@ import {
 } from "sequelize-typescript";
 import { Property } from "../../property/models/property.model";
 import { BlockProperty } from "../../block-property/models/block-property.model";
-import { Type } from "../../types/models/type.model";
+import { Types } from "../../types/models/type.model";
 import { User } from "../../user/models/user.model";
+import { ApiProperty } from "@nestjs/swagger";
 
 interface IBlockCreationAttr {
   typeId: number;
@@ -28,6 +29,10 @@ export class Block extends Model<Block, IBlockCreationAttr> {
   })
   declare id: number;
 
+  @ApiProperty({
+    example: 1,
+    description: "user id",
+  })
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
@@ -41,16 +46,24 @@ export class Block extends Model<Block, IBlockCreationAttr> {
   @BelongsToMany(() => Property, () => BlockProperty)
   properties: Property[];
 
-  @ForeignKey(() => Type)
+  @ApiProperty({
+    example: 1,
+    description: "type id",
+  })
+  @ForeignKey(() => Types)
   @Column({
     type: DataType.INTEGER,
     onDelete: "SET NULL",
   })
   typeId: number;
 
-  @BelongsTo(() => Type)
-  type: Type;
+  @BelongsTo(() => Types)
+  type: Types
 
+  @ApiProperty({
+    example: 1,
+    description: "Block id",
+  })
   @ForeignKey(() => Block)
   @Column({
     type: DataType.INTEGER,
@@ -61,6 +74,10 @@ export class Block extends Model<Block, IBlockCreationAttr> {
   @BelongsTo(() => Block)
   parent_category: Block;
 
+  @ApiProperty({
+    example: 1,
+    description: "order id",
+  })
   @Column({
     type: DataType.INTEGER,
   })

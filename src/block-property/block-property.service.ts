@@ -3,7 +3,7 @@ import { CreateBlockPropertyDto } from "./dto/create-block-property.dto";
 import { UpdateBlockPropertyDto } from "./dto/update-block-property.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { BlockProperty } from "./models/block-property.model";
-import { Type } from "../types/models/type.model";
+import { Types } from "../types/models/type.model";
 
 @Injectable()
 export class BlockPropertyService {
@@ -18,7 +18,7 @@ export class BlockPropertyService {
   findAll() {
     return this.blockPropertyModel.findAll({include:{all:true}
       // include: {
-      //   model: Type,
+      //   model: Types,
       //   attributes: ["name", "description"],
       //   through: { attributes: [] },
       // },

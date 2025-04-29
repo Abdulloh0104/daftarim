@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 
 interface ITypeCreationAttr {
@@ -6,7 +7,7 @@ interface ITypeCreationAttr {
 }
 
 @Table({ tableName: "type", timestamps: false })
-export class Type extends Model<Type, ITypeCreationAttr> {
+export class Types extends Model<Types, ITypeCreationAttr> {
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -14,11 +15,19 @@ export class Type extends Model<Type, ITypeCreationAttr> {
   })
   declare id: number;
 
+  @ApiProperty({
+    example: "user",
+    description: "role nomi",
+  })
   @Column({
     type: DataType.STRING,
   })
   declare name: string;
 
+  @ApiProperty({
+    example: "foydalanuvchi",
+    description: "Foydalanuvchi maqomi",
+  })
   @Column({
     type: DataType.STRING,
   })
