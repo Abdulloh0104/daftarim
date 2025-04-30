@@ -8,7 +8,7 @@ import { ActivateUserDto } from "./dto/activate-user.dto";
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User) private userModel: typeof User) {}
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
     return this.userModel.create(createUserDto);
   }
 
@@ -55,10 +55,13 @@ export class UserService {
     if (!user) {
       throw new NotFoundException("Bunday USER mavjud emas");
     }
-    const updated = await this.userModel.update({is_active:true}, {
-      where: { id: activateUserDto.userId },
-      returning: true,
-    });
-    return {message:"Foydalanuvchi faollashtirildi",updated};
+    const updated = await this.userModel.update(
+      { is_active: true },
+      {
+        where: { id: activateUserDto.userId },
+        returning: true,
+      }
+    );
+    return { message: "Foydalanuvchi faollashtirildi", updated };
   }
 }

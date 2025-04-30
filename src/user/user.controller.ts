@@ -9,6 +9,8 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  UseInterceptors,
+  UploadedFile,
 } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -20,14 +22,14 @@ import { ApiBearerAuth, ApiOperation, ApiResponse } from "@nestjs/swagger";
 import { User } from "./models/user.model";
 import { Roles } from "../common/decorator/roles-auth.decorator";
 import { RolesGuard } from "../common/guard/roles.guard";
-//findByEmail
+
 
   @Controller("user")
   export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    // @ApiBearerAuth()
+    // @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: "Foydalanuvchi qo'shish Controller" })
     @ApiResponse({
       status: 201,
@@ -35,7 +37,9 @@ import { RolesGuard } from "../common/guard/roles.guard";
       type: User,
     })
     @Post()
-    async create(@Body() createUserDto: CreateUserDto) {
+    async create(
+      @Body() createUserDto: CreateUserDto
+    ) {
       const user = await this.userService.findByEmail(createUserDto.email);
       if (user) {
         return this.userService.create(createUserDto);
@@ -43,7 +47,7 @@ import { RolesGuard } from "../common/guard/roles.guard";
       return { message: `Bunday foydalanuvchi mavjud` };
     }
 
-    @ApiBearerAuth()
+    // @ApiBearerAuth()
     @ApiOperation({ summary: "Barcha foydalanuvchilarni ma'lumotlarini olish" })
     @ApiResponse({
       status: 200,
@@ -56,15 +60,15 @@ import { RolesGuard } from "../common/guard/roles.guard";
       return this.userService.findAll();
     }
 
-    @ApiBearerAuth()
+    // @ApiBearerAuth()
     @ApiOperation({ summary: "Bitta foydalanuvchi ma'lumotlarini olish" })
     @ApiResponse({
       status: 200,
       description: "Get one user",
       type: User,
     })
-    @UseGuards(JwtSelfGuard)
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtSelfGuard)
+    // @UseGuards(JwtAuthGuard)
     @Get(":id")
     findOne(@Param("id") id: string) {
       return this.userService.findOne(+id);
@@ -92,8 +96,8 @@ import { RolesGuard } from "../common/guard/roles.guard";
       description: "Change one user info",
       type: User,
     })
-    @UseGuards(JwtSelfGuard)
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtSelfGuard)
+    // @UseGuards(JwtAuthGuard)
     @Patch(":id")
     update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
       return this.userService.update(+id, updateUserDto);
@@ -105,8 +109,8 @@ import { RolesGuard } from "../common/guard/roles.guard";
       status: 200,
       description: "Delete one user",
     })
-    @UseGuards(JwtSelfGuard)
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtSelfGuard)
+    // @UseGuards(JwtAuthGuard)
     @Delete(":id")
     remove(@Param("id") id: string) {
       return this.userService.remove(+id);

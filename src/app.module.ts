@@ -16,6 +16,15 @@ import { AuthModule } from "./auth/auth.module";
 import { Admin } from "./admin/models/admin.model";
 import { RoleModule } from "./role/role.module";
 import { Role } from "./role/models/role.model";
+import { FileModule } from "./file/file.module";
+import { CommentModule } from "./comment/comment.module";
+import { Comment } from "./comment/models/comment.model";
+import { DevicesModule } from "./devices/devices.module";
+import { Device } from "./devices/models/device.model";
+import { GroupModule } from "./group/group.module";
+import { Group } from "./group/models/group.model";
+import { WorkSpaceModule } from "./work-space/work-space.module";
+import { WorkSpace } from "./work-space/models/work-space.model";
 
 @Module({
   imports: [
@@ -27,7 +36,19 @@ import { Role } from "./role/models/role.model";
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DB,
-      models: [Property, Block, Types, BlockProperty, User, Admin, Role],
+      models: [
+        Property,
+        Block,
+        Types,
+        BlockProperty,
+        User,
+        Admin,
+        Role,
+        Comment,
+        Device,
+        Group,
+        WorkSpace,
+      ],
       autoLoadModels: true,
       sync: { alter: true },
       logging: false,
@@ -40,6 +61,11 @@ import { Role } from "./role/models/role.model";
     AdminModule,
     AuthModule,
     RoleModule,
+    FileModule,
+    CommentModule,
+    DevicesModule,
+    GroupModule,
+    WorkSpaceModule,
   ],
   controllers: [],
   providers: [],

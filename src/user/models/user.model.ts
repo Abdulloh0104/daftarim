@@ -1,6 +1,10 @@
-import {Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Block } from "../../block/models/block.model";
 import { ApiProperty } from "@nestjs/swagger";
+import { Comment } from "../../comment/models/comment.model";
+import { Device } from "../../devices/models/device.model";
+import { Group } from "../../group/models/group.model";
+import { WorkSpace } from "../../work-space/models/work-space.model";
 
 interface IUserCreationAttr {
   first_name: string;
@@ -92,5 +96,17 @@ export class User extends Model<User, IUserCreationAttr> {
   is_active: boolean;
 
   @HasMany(() => Block)
-  bloocks: Block[];
+  blocks: Block[];
+
+  @HasMany(() => Comment)
+  comment: Comment[];
+
+  @HasMany(() => Device)
+  device: Device[];
+
+  @HasMany(() => Group)
+  group: Group[];
+
+  @HasMany(() => WorkSpace)
+  workspace: WorkSpace[];
 }

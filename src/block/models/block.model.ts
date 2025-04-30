@@ -4,6 +4,7 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from "sequelize-typescript";
@@ -12,6 +13,7 @@ import { BlockProperty } from "../../block-property/models/block-property.model"
 import { Types } from "../../types/models/type.model";
 import { User } from "../../user/models/user.model";
 import { ApiProperty } from "@nestjs/swagger";
+import { Comment } from "../../comment/models/comment.model";
 
 interface IBlockCreationAttr {
   typeId: number;
@@ -82,4 +84,7 @@ export class Block extends Model<Block, IBlockCreationAttr> {
     type: DataType.INTEGER,
   })
   order_index: number;
+
+   @HasMany(() => Comment)
+    admins: Comment[];
 }

@@ -22,7 +22,7 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly adminService: AdminService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
   ) {}
 
   private async generateToken(user: User) {
