@@ -1,13 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from "sequelize-typescript";
 import { User } from "../../user/models/user.model";
+import { GroupMember } from "../../group_members/models/group_member.model";
 
 interface IGroupCreationAttr {
   name: string;
@@ -67,4 +70,7 @@ export class Group extends Model<Group, IGroupCreationAttr> {
     foreignKey: "created_by",
   })
   creator: User;
+
+  @BelongsToMany(() => User, () => GroupMember)
+  users: User[];
 }

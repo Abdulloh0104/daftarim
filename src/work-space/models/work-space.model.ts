@@ -1,6 +1,17 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import {
+  BelongsTo,
+  BelongsToMany,
+  Column,
+  DataType,
+  ForeignKey,
+  HasMany,
+  Model,
+  Table,
+} from "sequelize-typescript";
 import { User } from "../../user/models/user.model";
+import { WorkSpaceMember } from "../../work-space_members/models/work-space_member.model";
+import { TeamSpace } from "../../team_space/models/team_space.model";
 
 interface IWorkSpaceCreationAttr {
   name: string;
@@ -72,4 +83,10 @@ export class WorkSpace extends Model<WorkSpace, IWorkSpaceCreationAttr> {
     foreignKey: "created_by",
   })
   creator: User;
+
+  @BelongsToMany(() => User, () => WorkSpaceMember)
+  users: User[];
+
+  @HasMany(() => TeamSpace)
+  teamspace: TeamSpace[];
 }

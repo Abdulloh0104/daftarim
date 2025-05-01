@@ -1,10 +1,20 @@
-import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  HasMany,
+  Model,
+  Table,
+} from "sequelize-typescript";
 import { Block } from "../../block/models/block.model";
 import { ApiProperty } from "@nestjs/swagger";
 import { Comment } from "../../comment/models/comment.model";
 import { Device } from "../../devices/models/device.model";
 import { Group } from "../../group/models/group.model";
 import { WorkSpace } from "../../work-space/models/work-space.model";
+import { WorkSpaceMember } from "../../work-space_members/models/work-space_member.model";
+import { TeamSpace } from "../../team_space/models/team_space.model";
+import { GroupMember } from "../../group_members/models/group_member.model";
 
 interface IUserCreationAttr {
   first_name: string;
@@ -109,4 +119,13 @@ export class User extends Model<User, IUserCreationAttr> {
 
   @HasMany(() => WorkSpace)
   workspace: WorkSpace[];
+
+  @BelongsToMany(() => WorkSpace, () => WorkSpaceMember)
+  workspaces: WorkSpace[];
+
+  @HasMany(() => TeamSpace)
+  teamspace: TeamSpace[];
+
+  @BelongsToMany(() => Group, () => GroupMember)
+  groups: Group[];
 }

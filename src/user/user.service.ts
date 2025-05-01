@@ -4,6 +4,7 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { User } from "./models/user.model";
 import { ActivateUserDto } from "./dto/activate-user.dto";
+import { GroupService } from "../group/group.service";
 
 @Injectable()
 export class UserService {

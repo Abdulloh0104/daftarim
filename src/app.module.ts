@@ -25,6 +25,14 @@ import { GroupModule } from "./group/group.module";
 import { Group } from "./group/models/group.model";
 import { WorkSpaceModule } from "./work-space/work-space.module";
 import { WorkSpace } from "./work-space/models/work-space.model";
+import { WorkSpaceMembersModule } from "./work-space_members/work-space_members.module";
+import { WorkSpaceMember } from "./work-space_members/models/work-space_member.model";
+import { PermissionModule } from "./permission/permission.module";
+import { Permission } from "./permission/models/permission.model";
+import { TeamSpaceModule } from "./team_space/team_space.module";
+import { TeamSpace } from "./team_space/models/team_space.model";
+import { GroupMembersModule } from "./group_members/group_members.module";
+import { GroupMember } from "./group_members/models/group_member.model";
 
 @Module({
   imports: [
@@ -48,6 +56,10 @@ import { WorkSpace } from "./work-space/models/work-space.model";
         Device,
         Group,
         WorkSpace,
+        WorkSpaceMember,
+        Permission,
+        TeamSpace,
+        GroupMember
       ],
       autoLoadModels: true,
       sync: { alter: true },
@@ -66,6 +78,10 @@ import { WorkSpace } from "./work-space/models/work-space.model";
     DevicesModule,
     GroupModule,
     WorkSpaceModule,
+    WorkSpaceMembersModule,
+    PermissionModule,
+    TeamSpaceModule,
+    GroupMembersModule,
   ],
   controllers: [],
   providers: [],
